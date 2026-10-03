@@ -1,31 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-
-/*
-Header-logo, nav items
-Body-search, restro container-restro card-img, name of res,star rating, cuisine , delivery time
-Footer-copyright, links, address, contact
- */
-const Header = () => {
-  return (
-    <div className="header">
-      <div className="logo-container">
-        <img src="https://img.magnific.com/free-vector/vector-burger-illustration-design_779267-2398.jpg?semt=ais_hybrid&w=740&q=80" />
-      </div>
-      <div className="nav-items">
-        <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
-        </ul>
-      </div>
-    </div>
-  );
-};
-const styleCard = {
-  backgroundColor: "#f0f0f0",
-};
+import RestroCards from "./RestroCards";
 const resList = [
   {
     info: {
@@ -1519,27 +1492,6 @@ const resList = [
     },
   },
 ];
-const RestroCards = ({ resData }) => {
-  const { name, cuisines, avgRating, costForTwo, sla, cloudinaryImageId } =
-    resData?.info;
-  return (
-    <div className="res-card" style={styleCard}>
-      <img
-        className="res-logo"
-        alt="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/" +
-          cloudinaryImageId
-        }
-      />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <h4>{avgRating} stars</h4>
-      <h4>{costForTwo}</h4>
-      <h4>{sla.deliveryTime} minutes</h4>
-    </div>
-  );
-};
 const Body = () => {
   return (
     <div className="body">
@@ -1552,14 +1504,4 @@ const Body = () => {
     </div>
   );
 };
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout />);
+export default Body;
