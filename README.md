@@ -43,3 +43,7 @@ why react is fast?
 -coz it do dom manipulation efficiently and that is done using virtual dom;
 -react can find difference between virtual dom...this is called diff algorithm
 virtual dom is representation od actual dom;
+
+#Types of project Architecture:
+-Monolith Architecture
+-Microservices Architecture
