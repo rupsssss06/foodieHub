@@ -94,3 +94,7 @@ body {
   gap: 30px;
   justify-content: center;
 }
+.filter-btn {
+  margin: 10px;
+  cursor: pointer;
+}
