@@ -1,8 +1,9 @@
+import { LOGO_URL } from "../utils/constants";
 const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img src="https://img.magnific.com/free-vector/vector-burger-illustration-design_779267-2398.jpg?semt=ais_hybrid&w=740&q=80" />
+        <img src={LOGO_URL} />
       </div>
       <div className="nav-items">
         <ul>

@@ -1,3 +1,4 @@
+import { CDN_URL } from "../utils/constants";
 const RestroCards = ({ resData }) => {
   const { name, cuisines, avgRating, costForTwo, sla, cloudinaryImageId } =
     resData?.info;
@@ -6,10 +7,7 @@ const RestroCards = ({ resData }) => {
       <img
         className="res-logo"
         alt="res-logo"
-        src={
-          "https://media-assets.swiggy.com/swiggy/image/upload/" +
-          cloudinaryImageId
-        }
+        src={CDN_URL + cloudinaryImageId}
       />
       <h3>{name}</h3>
       <h4>{cuisines.join(", ")}</h4>

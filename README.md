@@ -22,3 +22,12 @@ Header-logo, nav items
 Body-search, restro container-restro card-img, name of res,star rating, cuisine , delivery time
 Footer-copyright, links, address, contact
 _/
+
+Two types of import/export:
+-Default Export/Import:
+export default Component;
+import Component from "path"
+
+-Named Export/Import:
+export const Component;
+import {Component} from "path";
