@@ -1,31 +1,57 @@
 import { useEffect, useState } from "react";
 import RestroCards from "./RestroCards";
-import resList from "../utils/mockData";
-
+import { PROXY_URL } from "../utils/constants";
+import Shimmer from "./Shimmer";
 const Body = () => {
-  const [listOfRestro, setListOfRestro] = useState(resList);
+  const [listOfRestro, setListOfRestro] = useState([]);
+  const [filtetredRestro, setFilteredRestro] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const API_URL =
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=26.14860&lng=85.89730&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
-
-    const PROXY_URL =
-      "https://corsproxy.io/?key=YOUR_API_KEY&url=" +
-      encodeURIComponent(API_URL);
-
     const data = await fetch(PROXY_URL);
 
     const json = await data.json();
 
-    console.log(json);
+    const restaurants = json.data.cards.find(
+      (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+    )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setListOfRestro(restaurants);
+    setFilteredRestro(restaurants);
   };
-  return (
+
+  return listOfRestro.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            placeholder="Search restaurants..."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          />
+          <button
+            onClick={() => {
+              //search text
+
+              //Filter the restro cartd and update the ui
+              const newFilteredRestro = listOfRestro.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase()),
+              );
+              setFilteredRestro(newFilteredRestro);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="filter-btn"
           onClick={() => {
@@ -39,7 +65,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container">
-        {listOfRestro.map((restaurent) => (
+        {filtetredRestro.map((restaurent) => (
           <RestroCards key={restaurent.info.id} resData={restaurent} />
         ))}
       </div>

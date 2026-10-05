@@ -47,3 +47,5 @@ virtual dom is representation od actual dom;
 #Types of project Architecture:
 -Monolith Architecture
 -Microservices Architecture
+
+##Whenever state variable updates, react triggers a reconciliation cycle(rerenders the Component)
