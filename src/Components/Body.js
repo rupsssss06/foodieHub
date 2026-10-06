@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import RestroCards from "./RestroCards";
 import { PROXY_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 const Body = () => {
   const [listOfRestro, setListOfRestro] = useState([]);
   const [filtetredRestro, setFilteredRestro] = useState([]);
@@ -12,7 +13,9 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(PROXY_URL);
+    const data = await fetch(
+      "https://foodfire.onrender.com/api/restaurants?lat=21.1702401&lng=72.83106070000001&page_type=DESKTOP_WEB_LISTING",
+    );
 
     const json = await data.json();
 
@@ -20,6 +23,7 @@ const Body = () => {
       (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setListOfRestro(restaurants);
+    console.log(restaurants);
     setFilteredRestro(restaurants);
   };
 
@@ -66,7 +70,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filtetredRestro.map((restaurent) => (
-          <RestroCards key={restaurent.info.id} resData={restaurent} />
+          <Link
+            key={restaurent.info.id}
+            to={"/restaurants/" + restaurent.info.id}
+          >
+            <RestroCards resData={restaurent} />
+          </Link>
         ))}
       </div>
     </div>

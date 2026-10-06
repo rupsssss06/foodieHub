@@ -49,3 +49,12 @@ virtual dom is representation od actual dom;
 -Microservices Architecture
 
 ##Whenever state variable updates, react triggers a reconciliation cycle(rerenders the Component)
+
+#useEffect Hook://IF no dependency array =>useEffect is called on every render
+//If dependency array is empty=> useEffect is called once after intial render
+
+//if dependency array is [loggedIn]=> called everytime loggedIn is updated
+
+#types of ROuting:
+-Client Side Routing
+-Server side Routing

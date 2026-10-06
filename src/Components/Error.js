@@ -18,10 +18,6 @@ const Error = () => {
         <h3>
           {err.status} {err.statusText}
         </h3>
-
-        <button onClick={() => (window.location.href = "/")}>
-          🏠 Back to Home
-        </button>
       </div>
     </div>
   );
