@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  console.log("Header Rendered");
+  useEffect(() => {
+    console.log("useEffect called");
+  }, [loggedIn]);
 
+  //IF no dependency array =>useEffect is called on every render
+  //If  dependency array is empty=> useEffect is called once after intial render
+
+  //if dependency array is [loggedIn]=> called everytime loggedIn is updated
   return (
     <div className="header">
       <div className="logo-container">
