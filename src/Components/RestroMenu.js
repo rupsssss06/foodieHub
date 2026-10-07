@@ -30,6 +30,7 @@ const RestroMenu = () => {
     .filter((card) => card?.card?.card?.itemCards)
     .flatMap((card) => card.card.card.itemCards);
   console.log(itemCards);
+  console.log(itemCards.map((item) => item.card.info.id));
   return (
     <div className="menu">
       <h1>{name}</h1>
@@ -40,8 +41,8 @@ const RestroMenu = () => {
 
       <h2>Menu</h2>
       <ul>
-        {itemCards.map((item) => (
-          <li key={item.card.info.id}>
+        {itemCards.map((item, index) => (
+          <li key={`${item.card.info.id}-${index}`}>
             {item.card.info.name} - Rs. {item.card.info.defaultPrice / 100}
           </li>
         ))}
