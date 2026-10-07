@@ -276,3 +276,7 @@ body {
   background: #e64600;
   transform: scale(1.03);
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}

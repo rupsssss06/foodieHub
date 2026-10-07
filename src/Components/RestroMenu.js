@@ -14,14 +14,23 @@ const RestroMenu = () => {
     const data = await fetch(menu_API + resId);
 
     const json = await data.json();
-    console.log(json);
 
     setResInfo(json?.data);
   };
   if (resInfo === null) return <Shimmer />;
-  const { name, cuisines, cloudinaryImageId, costForTwoMessage } =
-    resInfo?.cards?.find((card) => card?.card?.card?.info)?.card?.card?.info;
-  console.log(resInfo);
+  const info = resInfo?.cards?.find((c) => c?.card?.card?.info)?.card?.card
+    ?.info;
+  const {
+    name,
+    cuisines = [],
+    costForTwoMessage,
+    avgRating,
+    totalRatingsString,
+    areaName,
+    city,
+    sla,
+  } = info;
+
   const regularCards =
     resInfo?.cards?.find((card) => card?.groupedCard)?.groupedCard?.cardGroupMap
       ?.REGULAR?.cards || [];
@@ -29,8 +38,7 @@ const RestroMenu = () => {
   const itemCards = regularCards
     .filter((card) => card?.card?.card?.itemCards)
     .flatMap((card) => card.card.card.itemCards);
-  console.log(itemCards);
-  console.log(itemCards.map((item) => item.card.info.id));
+
   return (
     <div className="menu">
       <h1>{name}</h1>
@@ -43,7 +51,8 @@ const RestroMenu = () => {
       <ul>
         {itemCards.map((item, index) => (
           <li key={`${item.card.info.id}-${index}`}>
-            {item.card.info.name} - Rs. {item.card.info.defaultPrice / 100}
+            {item.card.info.name} - Rs.{" "}
+            {(item.card.info.price ?? item.card.info.defaultPrice) / 100}
           </li>
         ))}
       </ul>

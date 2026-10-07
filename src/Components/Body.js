@@ -23,7 +23,7 @@ const Body = () => {
       (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
     )?.card?.card?.gridElements?.infoWithStyle?.restaurants;
     setListOfRestro(restaurants);
-    console.log(restaurants);
+
     setFilteredRestro(restaurants);
   };
 
