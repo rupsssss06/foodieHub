@@ -58,3 +58,5 @@ virtual dom is representation od actual dom;
 #types of ROuting:
 -Client Side Routing
 -Server side Routing
+
+#class based component: never update state variable directly

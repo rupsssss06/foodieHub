@@ -280,3 +280,23 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.user-card {
+  width: 300px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.user-card h2 {
+  margin-bottom: 10px;
+}
+
+.user-card h3,
+.user-card h4 {
+  margin: 8px 0;
+  color: #555;
+}
