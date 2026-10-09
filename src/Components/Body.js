@@ -3,6 +3,7 @@ import RestroCards from "./RestroCards";
 import { PROXY_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStaus";
 const Body = () => {
   const [listOfRestro, setListOfRestro] = useState([]);
   const [filtetredRestro, setFilteredRestro] = useState([]);
@@ -26,7 +27,9 @@ const Body = () => {
 
     setFilteredRestro(restaurants);
   };
-
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return <h1>Looks like you're offline!! Please check your connection;</h1>;
   return listOfRestro.length === 0 ? (
     <Shimmer />
   ) : (

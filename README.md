@@ -62,3 +62,12 @@ virtual dom is representation od actual dom;
 #class based component: never update state variable directly
 
 #hook-kind of utility function
+
+##breaking down app into small chunks to optimize the working:
+-The code won't come directly until it is reuired
+-Chunking
+-Code Splitting
+-Dynamic Bundling
+-Lazy Loading
+-On demand loading
+-Dynamic Import
