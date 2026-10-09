@@ -7,7 +7,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-
+  const [submittedName, setSubmittedName] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
@@ -24,8 +24,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Contact form data:", formData);
-
+    setSubmittedName(formData.name);
     setSubmitted(true);
 
     setFormData({
@@ -47,7 +46,7 @@ const Contact = () => {
         {submitted ? (
           <div className="contact-success">
             <span>❤️</span>
-            <h2>Thank you, {formData.name || "friend"}!</h2>
+            <h2>Thank you, {submittedName || "friend"}!</h2>
             <p>Your message has been submitted successfully.</p>
             <button type="button" onClick={() => setSubmitted(false)}>
               Send Another Message

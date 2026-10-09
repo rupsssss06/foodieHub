@@ -60,3 +60,5 @@ virtual dom is representation od actual dom;
 -Server side Routing
 
 #class based component: never update state variable directly
+
+#hook-kind of utility function
