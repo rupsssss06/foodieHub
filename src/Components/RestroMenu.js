@@ -1,17 +1,17 @@
 import { useParams } from "react-router-dom";
-import Shimmer from "./Shimmer";
+import MenuShimmer from "./MenuShimmer";
 import useRestroMenu from "../utils/useRestroMenu";
 
 const RestroMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestroMenu(resId);
 
-  if (resInfo === null) return <Shimmer />;
+  if (resInfo === null) return <MenuShimmer />;
 
   const info = resInfo?.cards?.find((c) => c?.card?.card?.info)?.card?.card
     ?.info;
 
-  if (!info) return <Shimmer />;
+  if (!info) return <MenuShimmer />;
 
   const {
     name,

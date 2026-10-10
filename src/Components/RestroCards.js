@@ -9,8 +9,10 @@ const RestroCards = ({ resData }) => {
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
-      <h3 className="mx-1.25 mt-3.5 mb-2 text-xl text-[#222]">{name}</h3>
-      <h4 className="mx-1.25 my-2 text-sm font-medium text-[#666]">
+      <h3 className="mx-1.25 mt-3.5 mb-2 line-clamp-1 text-xl font-semibold text-[#222]">
+        {name}
+      </h3>
+      <h4 className="mx-1.25 my-2 line-clamp-2  text-sm font-medium text-[#666]">
         {cuisines.join(", ")}
       </h4>
       <h4 className="mx-1.25 my-2 text-sm font-medium text-[#666]">
