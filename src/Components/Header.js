@@ -5,26 +5,43 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img src={LOGO_URL} />
+    <div className="flex justify-between items-center border-s-black py-2.5 px-5">
+      <div>
+        <img className="w-20 h-20 object-contain" src={LOGO_URL} />
       </div>
-      <div className="nav-items">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
+      <div className="py-2 px-5">
+        <ul className="flex align-middle m-0 p-0 list-none">
+          <li className="m-2.5">
+            <Link
+              className="p-2.5 text-lg font-medium text-[#222] transition-colors duration-300 hover:text-[#ff5200]"
+              to="/"
+            >
+              Home
+            </Link>
           </li>
-          <li>
-            <Link to="/about">About Us</Link>
+          <li className="m-2.5">
+            <Link
+              className="p-2.5 text-lg font-medium text-[#222] transition-colors duration-300 hover:text-[#ff5200]"
+              to="/about"
+            >
+              About
+            </Link>
           </li>
-          <li>
-            <Link to="/contact">Contact Us</Link>
+          <li className="m-2.5">
+            <Link
+              className="p-2.5 text-lg font-medium text-[#222] transition-colors duration-300 hover:text-[#ff5200]"
+              to="/contact"
+            >
+              Contact
+            </Link>
           </li>
-          <li>
-            <Link>Cart</Link>
+          <li className="m-2.5">
+            <Link className="p-2.5 text-lg font-medium text-[#222] transition-colors duration-300 hover:text-[#ff5200]">
+              Cart
+            </Link>
           </li>
           <button
-            className="login"
+            className="my-2.5 ml-3.75 rounded-full bg-linear-to-br  from-[#ff5200] to-[#ff7a18] px-5.5 py-2.5 text-[15px] font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:from-[#e84900] hover:to-[#ff6410] hover:shadow-lg active:translate-y-0"
             onClick={() => {
               setLoggedIn(!loggedIn);
             }}
