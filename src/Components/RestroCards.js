@@ -28,4 +28,20 @@ const RestroCards = ({ resData }) => {
     </div>
   );
 };
+
+export const withRatingLabel = (RestroCards) => {
+  return (props) => {
+    const rating = props.resData?.info?.avgRating;
+    return (
+      <div className="relative">
+        {rating > 4.5 && (
+          <label className="absolute top-2 left-2 z-10 rounded bg-green-600 px-2 py-1 text-white">
+            Top Rated
+          </label>
+        )}
+        <RestroCards {...props} />
+      </div>
+    );
+  };
+};
 export default RestroCards;

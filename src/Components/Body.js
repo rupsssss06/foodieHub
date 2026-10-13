@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import RestroCards from "./RestroCards";
+import { withRatingLabel } from "./RestroCards";
 import { PROXY_URL } from "../utils/constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -8,7 +9,7 @@ const Body = () => {
   const [listOfRestro, setListOfRestro] = useState([]);
   const [filtetredRestro, setFilteredRestro] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const RestroCardsRated = withRatingLabel(RestroCards);
   useEffect(() => {
     fetchData();
   }, []);
@@ -82,7 +83,9 @@ const Body = () => {
             key={restaurent.info.id}
             to={"/restaurants/" + restaurent.info.id}
           >
-            <RestroCards resData={restaurent} />
+            {/**top rated restro */}
+            {}
+            <RestroCardsRated resData={restaurent} />
           </Link>
         ))}
       </div>
