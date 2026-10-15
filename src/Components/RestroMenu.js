@@ -30,7 +30,22 @@ const RestroMenu = () => {
   const itemCards = regularCards
     .filter((card) => card?.card?.card?.itemCards)
     .flatMap((card) => card.card.card.itemCards);
+  console.log(itemCards);
 
+  const groupedItems = itemCards.reduce((group, item) => {
+    const dish = item?.card?.info;
+
+    if (!dish) return groupedItems;
+
+    const category = dish.category || "Other Items";
+
+    if (!group[category]) {
+      group[category] = [];
+    }
+
+    group[category].push(item);
+    return group;
+  }, {});
   const imageUrl = cloudinaryImageId
     ? `https://media-assets.swiggy.com/swiggy/image/upload/${cloudinaryImageId}`
     : null;
@@ -98,35 +113,28 @@ const RestroMenu = () => {
             const price = dish.price ?? dish.defaultPrice;
 
             return (
-              <div
-                key={`${dish.id}-${index}`}
-                className="flex items-center justify-between gap-4 rounded-2xl border border-stone-200 bg-white p-4 shadow-sm transition hover:shadow-md sm:p-5"
-              >
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base font-semibold text-stone-800 sm:text-lg">
-                    {dish.name}
-                  </h3>
+              <div className="space-y-6">
+                {Object.entries(groupedItems).map(([category, items]) => (
+                  <div key={category}>
+                    {/* Category heading */}
+                    <h3>
+                      {category} ({items.length})
+                    </h3>
 
-                  <p className="mt-2 font-semibold text-stone-700">
-                    {price != null
-                      ? `₹${(price / 100).toFixed(0)}`
-                      : "Price unavailable"}
-                  </p>
+                    {/* Dishes inside this category */}
+                    {items.map((item, index) => {
+                      const dish = item?.card?.info;
 
-                  {dish.description && (
-                    <p className="mt-2 line-clamp-2 text-sm leading-5 text-stone-500">
-                      {dish.description}
-                    </p>
-                  )}
-                </div>
+                      if (!dish) return null;
 
-                {dish.imageId && (
-                  <img
-                    src={`https://media-assets.swiggy.com/swiggy/image/upload/${dish.imageId}`}
-                    alt={dish.name}
-                    className="h-24 w-24 shrink-0 rounded-xl object-cover sm:h-28 sm:w-28"
-                  />
-                )}
+                      return (
+                        <div key={`${dish.id}-${index}`}>
+                          <h4>{dish.name}</h4>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
               </div>
             );
           })}
