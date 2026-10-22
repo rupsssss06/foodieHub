@@ -46,6 +46,7 @@ const RestroMenu = () => {
     group[category].push(item);
     return group;
   }, {});
+  console.log(groupedItems);
   const imageUrl = cloudinaryImageId
     ? `https://media-assets.swiggy.com/swiggy/image/upload/${cloudinaryImageId}`
     : null;
