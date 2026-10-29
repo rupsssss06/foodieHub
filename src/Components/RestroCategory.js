@@ -1,10 +1,9 @@
 import CategoryList from "./CategoryList";
 import { useState } from "react";
-const RestroCategory = ({ category, items }) => {
+const RestroCategory = ({ category, items, showItems, setShowIndex }) => {
   const handleClick = () => {
-    setShowItmes(!showItems);
+    setShowIndex();
   };
-  const [showItems, setShowItmes] = useState(false);
   return (
     <>
       <div className="mb-4 rounded-xl bg-white p-4 shadow-sm">
@@ -16,7 +15,7 @@ const RestroCategory = ({ category, items }) => {
             {category} ({items.length})
           </h3>
 
-          <span>⬇️</span>
+          <span>{showItems ? "⬆️" : "⬇️"}</span>
         </div>
         {showItems && <CategoryList items={items} />}
       </div>

@@ -3,10 +3,11 @@ import MenuShimmer from "./MenuShimmer";
 
 import useRestroMenu from "../utils/useRestroMenu";
 import RestroCategory from "./RestroCategory";
+import { useState } from "react";
 const RestroMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestroMenu(resId);
-
+  const [showIndex, setShowIndex] = useState(0);
   if (resInfo === null) return <MenuShimmer />;
 
   const info = resInfo?.cards?.find((c) => c?.card?.card?.info)?.card?.card
@@ -109,8 +110,16 @@ const RestroMenu = () => {
 
         {/* Menu Items */}
         <div className="space-y-4">
-          {Object.entries(groupedItems).map(([category, items]) => (
-            <RestroCategory key={category} category={category} items={items} />
+          {Object.entries(groupedItems).map(([category, items], index) => (
+            <RestroCategory
+              key={category}
+              category={category}
+              items={items}
+              showItems={index === showIndex}
+              setShowIndex={() =>
+                setShowIndex(showIndex === index ? null : index)
+              }
+            />
           ))}
         </div>
       </div>
