@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import MenuShimmer from "./MenuShimmer";
-import useRestroMenu from "../utils/useRestroMenu";
 
+import useRestroMenu from "../utils/useRestroMenu";
+import RestroCategory from "./RestroCategory";
 const RestroMenu = () => {
   const { resId } = useParams();
   const resInfo = useRestroMenu(resId);
@@ -30,12 +31,11 @@ const RestroMenu = () => {
   const itemCards = regularCards
     .filter((card) => card?.card?.card?.itemCards)
     .flatMap((card) => card.card.card.itemCards);
-  console.log(itemCards);
 
   const groupedItems = itemCards.reduce((group, item) => {
     const dish = item?.card?.info;
 
-    if (!dish) return groupedItems;
+    if (!dish) return group;
 
     const category = dish.category || "Other Items";
 
@@ -46,7 +46,7 @@ const RestroMenu = () => {
     group[category].push(item);
     return group;
   }, {});
-  console.log(groupedItems);
+
   const imageUrl = cloudinaryImageId
     ? `https://media-assets.swiggy.com/swiggy/image/upload/${cloudinaryImageId}`
     : null;
@@ -109,36 +109,9 @@ const RestroMenu = () => {
 
         {/* Menu Items */}
         <div className="space-y-4">
-          {itemCards.map((item, index) => {
-            const dish = item.card.info;
-            const price = dish.price ?? dish.defaultPrice;
-
-            return (
-              <div className="space-y-6">
-                {Object.entries(groupedItems).map(([category, items]) => (
-                  <div key={category}>
-                    {/* Category heading */}
-                    <h3>
-                      {category} ({items.length})
-                    </h3>
-
-                    {/* Dishes inside this category */}
-                    {items.map((item, index) => {
-                      const dish = item?.card?.info;
-
-                      if (!dish) return null;
-
-                      return (
-                        <div key={`${dish.id}-${index}`}>
-                          <h4>{dish.name}</h4>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-            );
-          })}
+          {Object.entries(groupedItems).map(([category, items]) => (
+            <RestroCategory key={category} category={category} items={items} />
+          ))}
         </div>
       </div>
     </div>
